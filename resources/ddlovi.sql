@@ -24,6 +24,14 @@ create table selektirani_gradovi
 
 
 );
+
+
+INSERT INTO selektirani_gradovi (grad)  VALUES("Zagreb-Maksimir", "Zavian", "Senj");
+
+
+
+
+
 insert into runconfig (naziv, target, host ,uri ,port) values ("dhmz-n","dhmz_hrvatska", "vrijeme.hr", "/hrvatska_n.xml", 80);
 insert into runconfig (naziv, target, host ,uri ,port) values ("dhmz-01","dhmz_hrvatska", "vrijeme.hr", "/hrvatska_n_01.xml", 80);
 insert into runconfig (naziv, target, host ,uri ,port) values ("dhmz-02","dhmz_hrvatska", "vrijeme.hr", "/hrvatska_n_02.xml", 80);
@@ -106,20 +114,6 @@ insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) val
 insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Senj", 11, 12.5, 	14.8, 	10.2, 	77);
 insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Senj", 12, 8.2, 	10.3, 	6.1, 	78);
 
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 1, 9.5   ,	12.7  ,	6.8 ,	72);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 2, 9.5 , 	13.0, 	6.4,    72);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 3, 12.2, 	15.6 , 	8.6, 	74);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 4, 15.2, 	18.8, 	11.8, 	77);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 5, 20.0, 	23.5, 	15.9, 	75);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 6, 24.1 , 	27.9, 	19.7, 	79);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 7, 26.7, 	30.8, 	22.4, 	77);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 8, 26.0, 	30.7 , 	22.2, 	83);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 9, 22.0, 	26.6, 	18.7, 	84);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 10, 18.8 , 22.1, 	15.4, 	75);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 11, 14.3, 	17.7, 	12.1, 	74);
-insert into prosjeci (grad, mjesec, temp_sred ,temp_max ,temp_min, padaline) values ("Hvar", 12, 10.9, 	14.0, 	8.4, 	76);
-
-
 
 
 /* drop table raw_import */
@@ -176,27 +170,3 @@ VALUES(1, 'user1', '123', NULL, 0);
 update korisnici set password= sha2("123", 256);
 
 
-
-   
-    
-    
- /* delete from podaci_anal; */
-/*
-insert into podaci_anal (grad, datum, temp_min, temp_max, temp_sred) 
-select grad, date(datum), min(temp) as min1, max(temp) as max1, avg(temp) as avg1 
-from podaci 
-where datum >='2016-05-01 00:00' and datum<'2016-06-01 00:00'
-/*and grad='Zagreb-Maksimir' */
-group by grad, date(datum)
-order by grad , date(datum)
-*/
-
-
-select * from podaci_anal where grad='Zagreb-Maksimir' order by grad, datum;   
-    
-    
-
-
-
-select * podaci where datum >= '2016-05-13 00:00'
-*/
