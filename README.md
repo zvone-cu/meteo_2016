@@ -1,14 +1,14 @@
-## Meteo
+## Meteo_2016
 
-hobistički rest-api client webapp projekt koji svakog sata čupa podatke sa službenih DHMZ servisa i sprema ih u bazu [https://vrijeme.hr/hrvatska_n.xml](https://vrijeme.hr/hrvatska_n.xml), za par odabranih gradova, te ih pohranjuje u mysql bazu podataka, te frontend sučelje koje prikazuje podatke o temperaturi, tlaku, vlazi i vjetru za odabrani vremenski period u obliku klasičnog 2D prikaza ili aktualne ruže vjetrova.
+Hobistički rest-klijent web app projekt koji svakog sata čupa podatke sa [https://vrijeme.hr/hrvatska_n.xml](https://vrijeme.hr/hrvatska_n.xml), za par odabranih gradova, te ih pohranjuje u lokalnu mysql bazu podataka, sa frontend web sučeljem koje prikazuje podatke o temperaturi, tlaku, vlazi i vjetru za odabrani vremenski period u obliku klasičnog 2D grafičkog prikaza ili aktualne ruže vjetrova.
 
 <p align="center">
-<a href="meteo1.png"><img src="meteo1.png" width="30%"></a>
-<a href="meteo2.png"><img src="meteo2.png" width="30%"></a>
+<a href="meteo1.png"><img src="meteo1.png" width="49%"></a>
+<a href="meteo2.png"><img src="meteo2.png" width="49%"></a>
 </p>
 <p align="center">
-<a href="meteo3.png"><img src="meteo3.png" width="30%"></a>
-<a href="meteo4.png"><img src="meteo4.png" width="30%"></a>
+<a href="meteo3.png"><img src="meteo3.png" width="49%"></a>
+<a href="meteo4.png"><img src="meteo4.png" width="49%"></a>
 </p>
 
 ## Korištene/preporučene tehnologije
@@ -21,10 +21,13 @@ hobistički rest-api client webapp projekt koji svakog sata čupa podatke sa slu
 
 ## Deploy
 
-### Prerekviziti za deploy:
-instalirati:  
-1. Mysql  5.5-5.7 //ili više po želji uz malo sreće
-2. Apache Tomcat  7-8  //ili više po želji uz malo sreće
+### Preporučeni prerekviziti:
+1. Linux OS  
+2. Mysql  5.5-5.7  
+3. Apache Tomcat  7-8  
+4. Java 8  
+5. Ecplipse IDE  
+
 
 ### Build & deploy:
 
