@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>KONFIGURACIJA</title>
+
+	 <p:growl id="growl2" showDetail="true" sticky="true" autoUpdate="true" />  
+
+</h:head>
+
+<h:body>
+	<p:outputLabel styleClass="headers" value="CONFIG"/>
+	<h:form>
+		<p:panelGrid >
+        <p:row>
+            <p:column>		
+			<p:outputLabel value="Izvor podataka: "></p:outputLabel>
+            </p:column>		
+            <p:column>		
+
+
+			<p:selectOneMenu id="runConf1"
+				value="#{meteoConfigBean.selectedRunConfig}"
+				converter="#{runConfigConverter}">
+
+				<f:selectItems value="#{meteoConfigBean.runConfigList}"
+					var="runconf" itemLabel="#{runconf.naziv}" itemValue="#{runconf}" />
+				<p:ajax process="@this" update="testCall"/>
+			</p:selectOneMenu>
+			</p:column>	
+				
+			<p:column >
+				<p:commandButton id="testCall"
+						value="Test dohvata za host:#{meteoConfigBean.selectedRunConfig}"
+						action="#{meteoConfigBean.callMeteoData}" update="growl2" />
+				<p:commandButton id="testCall2"
+						value="Dohvat kompletnog dana"
+						action="#{meteoConfigBean.callMeteoDataWholeDay}" update="growl2" />
+			</p:column>		
+        </p:row>
+        <p:row>
+
+
+
+            <p:column>		
+
+			<p:outputLabel value="Gradovi koji se prate:" />
+            </p:column>		
+            <p:column colspan="2">		
+
+
+
+    		<p:pickList id="OdabirGradova" value="#{meteoConfigBean.gradovi}" var="gradovi" itemLabel="#{gradovi}" itemValue="#{gradovi}"  />
+			
+            </p:column>		
+	
+
+       	</p:row>
+        <p:row>
+
+          <p:column colspan="3">		
+
+			<p:commandButton value="ok" action="#{meteoConfigBean.saveConfigPage}" />
+	
+			<p:commandButton immediate="true" value="odustani" action="index" />
+
+          </p:column>
+	
+          	
+       	</p:row>
+
+		</p:panelGrid>
+	</h:form>
+	<p:panelGrid  >
+	<p:row><p:column >
+ 		<p:commandLink  disabled="#{!meteoConfigBean.testEnvironment}"  value="Import hist.fajla" action="importPage" />
+	</p:column></p:row>
+	<p:row><p:column >
+		<p:commandLink  rendered="#{meteoConfigBean.testEnvironment}" value="Statist.obrada za preth.mj." action="#{meteoConfigBean.callMonthlyAnalysis}" />
+	</p:column></p:row>
+	</p:panelGrid>
+	
+</h:body>
+</html>

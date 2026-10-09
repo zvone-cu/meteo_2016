@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+        	elementFormDefault="qualified" 
+       		 attributeFormDefault="unqualified"     >
+
+  <xs:element name="Hrvatska">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="DatumTermin">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Datum"/>
+              <xs:element type="xs:byte" name="Termin"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Grad" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="GradIme"/>
+              <xs:element name="Podatci">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:float" name="Temp"/>
+                    <xs:element type="xs:byte" name="Vlaga"/>
+                    <xs:element type="xs:string" name="Tlak"/>
+                    <xs:element type="xs:float" name="TlakTend"/>
+                    <xs:element type="xs:string" name="VjetarSmjer"/>
+                    <xs:element type="xs:float" name="VjetarBrzina"/>
+                    <xs:element type="xs:string" name="Vrijeme"/>
+                    <xs:element type="xs:byte" name="VrijemeZnak"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:byte" name="autom" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

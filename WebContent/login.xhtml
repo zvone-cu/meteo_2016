@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>login</title>
+
+</h:head>
+<h:body>
+	<p:growl id="growl5" showDetail="false" sticky="false"  autoUpdate="true"  />
+	
+	<h:form>
+		<p:panelGrid style="width:100%">
+			<p:row>
+				<p:column
+					style="width:100%; background-color:#dde79a;text-align:left;">
+					<p:outputLabel style="color:green; background-color:#dde79a;"
+						value="METEO v.2026.03.29" />
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<p:panelGrid style="width:50%">
+			<p:row>
+			<p:column>
+				<h3>Unesite vaše kredencijale:</h3>
+			</p:column>
+			</p:row>
+			<p:row>
+			<p:column style="width:50%">
+				<h:outputText value="Korisničko ime :" />
+			</p:column>
+			<p:column style="width:49%;" >
+				<p:inputText style="width:100%" id="username" value="#{login.user}"/>
+				<h:message for="username"></h:message>
+			</p:column>
+			</p:row>
+			<p:row>
+			<p:column style="width:49%">
+				<h:outputText value="Lozinka : " />
+			</p:column>
+			<p:column style="width:100%;margin-right: 6px;">
+				<p:password  style="width:100%" id="password" value="#{login.pwd}"/>
+				<h:message for="password"></h:message>
+			</p:column>
+			</p:row>
+			<p:row>
+			<p:column style="width:100%" colspan="2">
+
+				<p:commandButton style="width:100%" action="#{login.validateUsernamePassword}"
+					value="Potvrdi"></p:commandButton>
+			</p:column>
+
+			</p:row>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>

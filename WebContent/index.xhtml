@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="styles.css"  />
+
+	<p:growl id="growl1" showDetail="true" sticky="true"  autoUpdate="true"  />
+
+</h:head>
+<h:body>
+	<h:form >
+        <p:poll interval="900" listener="#{meteoConfigBean.promjenaPerioda}" update="graf1JFC,graf1PF,graf2JFC,growl1,period,statistika" /> 
+
+		<p:panelGrid style="width:100%">
+			<p:row>
+				<p:column  style="width:50%; background-color:#dde79a;text-align:left;" >
+					<p:outputLabel style="color:green; background-color:#dde79a;" value="METEO v.2026.03.29"/>
+				</p:column>
+				<p:column style="width:50%; background-color:#dde79a;text-align:right;" >
+					<p:outputLabel style="color:green; background-color:#dde79a;" value="korisnik: #{login.user}"/>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<p:panelGrid style="width:1000px">			
+			<p:row>
+				<p:column style="width:200px" >
+					<p:outputLabel value="Period promatranja:"></p:outputLabel>
+				</p:column>
+
+				<p:column  style="width:100px">
+					<p:commandButton  style="width:100%"
+						icon="ui-icon-circle-arrow-w" id="jucer"
+						action="#{meteoConfigBean.promjenaPeriodaJucer}"
+						update="graf1JFC,graf2JFC,graf1PF,growl1" />
+				</p:column>
+				<p:column style="width:300px">
+
+					<p:selectOneMenu id="period" style="width:80%"
+						value="#{meteoConfigBean.selectedPeriod}">
+
+						<f:selectItem itemLabel="Najnovije" itemValue="D" />
+						<f:selectItem itemLabel="1 dan" itemValue="1D" />
+						<f:selectItem itemLabel="2 dana" itemValue="2D" />
+						<f:selectItem itemLabel="3 dana" itemValue="3D" />
+						<f:selectItem itemLabel="7 dana" itemValue="7D" />
+						<f:selectItem itemLabel="Mjesec" itemValue="M" />
+
+						<p:ajax listener="#{meteoConfigBean.promjenaPerioda}" update="graf1JFC,graf2JFC,graf1PF,growl1,period,statistika" />
+
+					</p:selectOneMenu>
+
+				</p:column>
+				<p:column  style="width:100px" >
+					<p:commandButton 
+						style="width:100%" id="sutra" 
+						update="graf1JFC,graf2JFC,graf1PF,growl1" 
+						icon="ui-icon-circle-arrow-e"
+						action="#{meteoConfigBean.promjenaPeriodaSutra}" />
+				</p:column>
+				<p:column width="100%" >	
+				<p:outputLabel  value=" " />
+				</p:column>
+				
+
+			</p:row>
+
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Tip podataka:"></p:outputLabel>
+				</p:column>
+				<p:column/>
+				<p:column >
+
+					<p:selectOneMenu id="tip" value="#{meteoConfigBean.selectedTip}">
+
+						<f:selectItem itemLabel="Temperatura" itemValue="T" />
+						<f:selectItem itemLabel="Tlak" itemValue="P" />
+						<f:selectItem itemLabel="Vlaga" itemValue="H" />
+						<f:selectItem itemLabel="Vjetar" itemValue="V" />
+						<f:selectItem itemLabel="Vjetar-jačina" itemValue="V.J" />
+						<f:selectItem itemLabel="Vjetar-smjer"  itemValue="V.S" />
+
+						<p:ajax listener="#{meteoConfigBean.promjenaTipa}" update="graf1JFC,graf1PF,growl1,statistika"  />
+
+
+					</p:selectOneMenu>
+				</p:column>
+				
+				<p:column colspan="2">
+					<p:outputLabel value="Aprox." />
+					<p:selectBooleanCheckbox value="#{meteoConfigBean.splajn}"  >
+						<p:ajax listener="#{meteoConfigBean.promjenaTipa}" update="graf1JFC,graf1PF,growl1"  />
+					</p:selectBooleanCheckbox>
+				
+				</p:column>
+				
+			</p:row>
+			<p:row>
+				<p:column>
+
+					<p:outputLabel value="Promatrana lokacija:"></p:outputLabel>
+				</p:column>
+				<p:column/>
+				<p:column colspan="3">
+
+					<p:selectOneMenu id="lokacija"
+						value="#{meteoConfigBean.selectedLokacija}">
+
+						<f:selectItems value="#{meteoConfigBean.selektiraniGradoviList}" />
+
+						<p:ajax listener="#{meteoConfigBean.promjenaLokacije}"   update="graf1JFC,graf2JFC,graf1PF,growl1"  />
+
+
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column colspan="5" style="height:700px">
+
+					<p:graphicImage id="graf1JFC" value="#{meteoConfigBean.grafTemp1Png}"	cache="false" />
+				</p:column>
+
+			</p:row>
+
+			<p:row>
+				<p:column colspan="5" >
+					<p:commandButton value="JFreeCh-refresh"
+						action="#{meteoConfigBean.grafJFreeChart}" update="graf1JFC" />
+				</p:column>
+
+			</p:row>
+			
+		
+		
+			<p:row>
+				<p:column colspan="5" style="height:600px">
+
+					<p:graphicImage id="graf2JFC" value="#{meteoConfigBean.grafWindRose1Png}"	cache="false" />
+				</p:column>
+
+			</p:row>
+
+			<p:row>
+				<p:column colspan="5" >
+					<p:commandButton value="WindRose1-refresh"
+						action="#{meteoConfigBean.grafWindRose1}" update="graf2JFC" />
+				</p:column>
+
+			</p:row>
+			
+
+			<p:row>
+				<p:column colspan="5">
+
+
+					<p:chart id="graf1PF" type="line" 
+						model="#{meteoConfigBean.grafTemp1v2}" style="height:700px;width:#{meteoConfigBean.pFxSize}px" /> 
+													
+				</p:column>
+				
+			</p:row>
+
+			<p:row>
+				<p:column colspan="1">
+					<p:commandButton value="PrFcs-refresh"
+						action="#{meteoConfigBean.grafPF}" update="graf1PF" />
+				</p:column>
+
+				<p:column colspan="4" >
+					<p:commandButton id="statistika" 
+						disabled="#{!(meteoConfigBean.selectedTip eq 'T' and (meteoConfigBean.selectedPeriod eq '7D' or  meteoConfigBean.selectedPeriod eq 'M') )}"  
+					    value="statistika" action="#{statBean.drawGrafH1}"  />
+				</p:column>
+			</p:row>
+
+		</p:panelGrid>
+		<p:remoteCommand name="init1" actionListener="#{meteoConfigBean.promjenaTipa}" style="display: none;" update="@form,period" />
+
+	</h:form>
+	
+	
+	<p:panelGrid style="width:100%">
+			<p:row>
+				<p:column>
+				<br/>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:100%; text-align:left;" >
+					<p:commandLink disabled="#{!meteoConfigBean.testEnvironment}" value="Konfiguracijska stranica" action="configPage" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+				<br/><br/>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column style="width:50%; background-color:#dde79a;text-align:left;" >
+					<p:outputLabel style="color:green; background-color:#dde79a;" value="Izvor podataka:DHMZ (http://vrijeme.hr/hrvatska_n.xml)"/>
+				</p:column>
+				<p:column style="width:50%; background-color:#dde79a;text-align:right;" >
+					<p:commandLink  value="Logout" action="#{login.logout}" />
+				</p:column>
+				
+			</p:row>
+		</p:panelGrid>
+
+</h:body>
+</html>

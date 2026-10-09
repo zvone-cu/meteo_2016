@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="styles.css"  />
+	
+	<p:growl id="growl3" showDetail="true" sticky="true"  autoUpdate="true"  />
+
+
+</h:head>
+<h:body>
+	<p:outputLabel styleClass="headers" value="STATISTIKA ZA RAZDOBLJE #{meteoConfigBean.period}"/>
+	
+	<h:form >
+		<p:panelGrid style="width:1000px">
+
+
+			<p:row>
+				
+				<p:column >
+					<p:outputLabel value="Min" />
+
+					<p:selectBooleanCheckbox value="#{statBean.min}"  >
+						<p:ajax  listener="#{statBean.drawGrafH1}"	update="grafH1"  />
+					</p:selectBooleanCheckbox>
+				
+				</p:column>
+				
+				
+				<p:column >
+					<p:outputLabel value="Avg" />
+
+					<p:selectBooleanCheckbox value="#{statBean.avg}"  >
+						<p:ajax  listener="#{statBean.drawGrafH1}"	update="grafH1"  />
+					</p:selectBooleanCheckbox>
+				
+				</p:column>
+				
+				
+				<p:column >
+					<p:outputLabel value="Max" />
+
+					<p:selectBooleanCheckbox value="#{statBean.max}"  >
+						<p:ajax  listener="#{statBean.drawGrafH1}"	update="grafH1"  />
+					</p:selectBooleanCheckbox>
+				
+				</p:column>
+								
+				<p:column >
+					<p:outputLabel value="Povjesni prosjeci" />
+
+					<p:selectBooleanCheckbox value="#{statBean.ref}"  >
+						<p:ajax  listener="#{statBean.drawGrafH1}"	update="grafH1"  />
+					</p:selectBooleanCheckbox>
+				
+				</p:column>
+								
+				
+				
+			</p:row>
+			<p:row>
+				<p:column colspan="4" style="height:600px">
+
+					<p:graphicImage id="grafH1" value="#{statBean.grafH1}"	cache="false" />
+				</p:column>
+
+			</p:row>
+
+			<p:row>
+				<p:column colspan="4" >
+					<p:commandButton value="refresh"	action="#{statBean.drawGrafH1}" update="grafH1" />
+				</p:column>
+
+			</p:row>
+
+		
+			<p:row>
+				<p:column colspan="4" >
+					<p:commandButton  value="natrag" action="#{meteoConfigBean.grafJFreeChart}" />
+				</p:column>
+
+			</p:row>
+	
+
+		</p:panelGrid>
+		
+	</h:form>
+	
+
+
+	
+</h:body>
+</html>
