@@ -11,33 +11,33 @@
 
 
 ### Opis projekta
-Hobistički rest-klijent web app projekt koji svakog sata čupa podatke sa [https://vrijeme.hr/hrvatska_n.xml](https://vrijeme.hr/hrvatska_n.xml), za par odabranih gradova, te ih pohranjuje u lokalnu mysql bazu podataka, sa frontend web sučeljem koje prikazuje podatke o temperaturi, tlaku, vlazi i vjetru za odabrani vremenski period u obliku klasičnog 2D grafičkog prikaza ili aktualne ruže vjetrova.  
-Raw XML odziv HDMZ-ovog rest servisa može se vidjeti sa: *curl -s "https://vrijeme.hr/hrvatska_n.xml"*  
+Hobistički rest-klijent web app projekt koji svakog sata čupa podatke sa DHMZ servisa [https://vrijeme.hr/hrvatska_n.xml](https://vrijeme.hr/hrvatska_n.xml), za par odabranih gradova, te ih pohranjuje u lokalnu mysql bazu podataka, sa frontend web sučeljem koje prikazuje podatke o temperaturi, tlaku, vlazi i vjetru za odabrani vremenski period u obliku klasičnog 2D grafičkog prikaza ili ruže vjetrova.  
+Raw XML odziv DHMZ-ovog rest servisa može se vidjeti sa: *curl -s "https://vrijeme.hr/hrvatska_n.xml"*  
 
 
 
-## Korištene/preporučene tehnologije
+## Korištene tehnologije
 - JSF 2.2 sa PrimeFaces 5.3 kao frontend
 - Java 8 kao backend
-- Maven kao build engine
+- Maven kao project build engine
 - Eclipse kao preporučeni IDE
-- Mysql 5.5. ili 5.7 baza podataka
-- Tomcat 7 ili 8 server kao deploy target
+- Mysql 5.5. ili 5.7 kao baza podataka
+- Tomcat 7-9 server kao deploy target
 
 ## Deploy
 
-### Preporučeni prerekviziti:
-1. Linux OS  
+### Preporučene predinstalacije:
+1. Linux OS host
 2. Mysql  5.5-5.7  
-3. Apache Tomcat  7-8  
-4. Java 8  
+3. Apache Tomcat  7>
+4. Java 8>  
 5. Ecplipse IDE  
 
 
 ### Build & deploy:
 
 1. *git clone [https://github.com/zvone-cu/meteo_2016.git](https://github.com/zvone-cu/meteo_2016.git)*
-2. importati kao maven project u eclipse
+2. importati klonirani projekt kao maven project u eclipse
 3. kreirati bazu podataka METEO_DHMZ sa ovlaštenim userom 
 
 	>*sudo mysql -u root -p  
@@ -58,10 +58,10 @@ Raw XML odziv HDMZ-ovog rest servisa može se vidjeti sa: *curl -s "https://vrij
 	>*mysql -u nazivusera -p METEO_DHMZ < ./resources/ddlovi.sql*  
 	
 5. updejatati konekcijske parametre baze (nazivusera/pwd) u sve **persistence.xml** fajlove u projektu
-6. generirati **meteo_2016.war** deploy artefakt izvršavanjem maven targeta **clean install**, uz *skip tests*
-7. deployati meteo_2016.war artefakt s projektnog **target** foldera na tomcat server webapp folder. 
+6. generirati **meteo_2016.war** deploy artefakt izvršavanjem maven targeta **clean install**, uz opciju *skip tests*
+7. deployati kreirani meteo_2016.war artefakt s projektnog **target** foldera na tomcat server webapp folder. 
    ako se želi da maven obavlja automatski deploy an tomcat, updejtati glavni **pom.xml** parametrima ovlaštenog tomcat usera u bloku za *plugine* (*tomcat7-maven-plugin*)
-8. webappu se pristupa browserom na **<tomcat adresa>/meteo_2016**
+8. webappu se pristupa browserom na **\<tomcat adresa\>/meteo_2016**
 
  
 ## License
