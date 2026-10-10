@@ -60,13 +60,12 @@ Raw XML odziv DHMZ-ovog rest servisa može se vidjeti sa: *curl -s "https://vrij
 5. updejatati konekcijske parametre baze (nazivusera/pwd) u sve **persistence.xml** fajlove u projektu
 6. generirati **meteo_2016.war** deploy artefakt izvršavanjem maven targeta **clean install**, uz opciju *skip tests*
 7. deployati kreirani meteo_2016.war artefakt s projektnog **target** foldera na tomcat server webapp folder. 
-   ako se želi da maven obavlja automatski deploy an tomcat, updejtati glavni **pom.xml** parametrima ovlaštenog tomcat usera u bloku za *plugine* (*tomcat7-maven-plugin*)
-8. webappu se pristupa browserom na **\<tomcat adresa\>/meteo_2016**
+   ako se želi da maven obavlja automatski deploy na tomcat, updejtati glavni **pom.xml** kredencijalima tomcat admin usera u bloku za *plugine* (*tomcat7-maven-plugin*)
+8. meteo webappu se pristupa browserom na **\<tomcat adresa\>/meteo_2016**
 
  
 ## License
 
-This project is licensed under the GNU General Public License v3.0 - see the LICENSE file for details.  
-
+This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html#license-text)
 
 
